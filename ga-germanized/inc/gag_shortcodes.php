@@ -54,20 +54,40 @@ if( ! class_exists('gag_shortcodes') ):
 			wp_enqueue_script('google-analytics-germanized-gaoptout');
 		}
 
-		public static function ga_optout( $atts )
-		{
-			$a = shortcode_atts( array(
-				'text' => esc_html__('Disable Google Analytics', 'ga-germanized'),
-			), $atts );
-
-			$settings = gag_settings_handler::current_settings();
-
-			return sprintf(
-				__('<a href="#" data-ua="%s" class="gaoptout">%s</a>', 'ga-germanized'),
-
-				$settings['analytics-id'],
-				$a['text']
+		public static function ga_optout( $atts ) {
+			// Defaults
+			$defaults = array(
+				'text' => __( 'Disable Google Analytics', 'ga-germanized' ),
 			);
+
+			// Merge attributes with defaults; include shortcode tag for filters.
+			$a = shortcode_atts( $defaults, $atts, 'ga-optout' );
+
+			// Sanitize user-controllable input early
+			// We treat "text" strictly as plain text label.
+			$link_text = sanitize_text_field( $a['text'] ?? $defaults['text'] );
+
+			// Fetch settings defensively
+			$settings = is_array( gag_settings_handler::current_settings() ) ? gag_settings_handler::current_settings() : array();
+			$analytics_id = isset( $settings['analytics-id'] ) ? (string) $settings['analytics-id'] : '';
+
+			// (Optional) light validation of the analytics ID; if invalid, leave empty.
+			// Accept common GA formats like "UA-XXXXXX-Y" or "G-XXXXXXXXXX".
+			if ( $analytics_id !== '' ) {
+				$is_valid_ga = preg_match( '/^(UA-\d{4,}-\d+|G-[A-Z0-9]{6,})$/i', $analytics_id ) === 1;
+				if ( ! $is_valid_ga ) {
+					$analytics_id = '';
+				}
+			}
+
+			// Build safe HTML
+			$html = sprintf(
+				'<a href="#" data-ua="%1$s" class="gaoptout">%2$s</a>',
+				esc_attr( $analytics_id ),
+				esc_html( $link_text )
+			);
+
+			return $html;
 		}
 	}
 endif;

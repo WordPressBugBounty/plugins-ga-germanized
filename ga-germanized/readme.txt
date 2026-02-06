@@ -3,8 +3,8 @@ Contributors: pascalbajorat, sascharudolph
 Donate link: https://www.bajorat-media.com/spenden/
 Tags: google, analytics, gaoptout, german, anonymize_ip, gdpr, dsgvo, gtag, universal, germanized, tracking, privacy, eu, law, settings, outbound
 Requires at least: 5.0
-Tested up to: 6.1
-Stable tag: 1.6.2
+Tested up to: 6.9
+Stable tag: 1.6.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -55,6 +55,9 @@ If you have any questions or problems, contact me: [Pascal Bajorat (Bajorat Medi
 4.	Other Tracking Codes
 
 == Changelog ==
+
+= 1.6.3 =
+* Fixed XSS
 
 = 1.6.2 =
 * bugfix

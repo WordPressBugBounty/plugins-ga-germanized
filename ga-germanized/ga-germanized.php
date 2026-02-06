@@ -3,14 +3,14 @@
 Plugin Name: Analytics Germanized for Google Analytics
 Plugin URI: https://wordpress.org/plugins/ga-germanized/
 Description: Google Analytics preconfigured to respect EU law (GDPR / DSGVO) and with lots of advanced analytics settings for extensive tracking possibilities.
-Version: 1.6.2
+Version: 1.6.3
 Author: Pascal Bajorat
 Author URI: https://www.bajorat-media.com/
 Text Domain: ga-germanized
 Domain Path: /lang
 License: GNU General Public License v.3
 
-Copyright (c) 2022 by Bajorat-Media.com.
+Copyright (c) 2025 by Bajorat-Media.com.
 */
 
 /* Security-Check */
